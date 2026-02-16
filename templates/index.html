@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<title>Eye Disease Detection</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Eye Disease Detection</h1>
+            <p>Upload OCT scan and/or Fundus image for analysis</p>
+        </div>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="upload-container">
+                <div class="upload-card">
+                    <label class="upload-label" for="octFile">OCT Scan (Optional)</label>
+                    <input type="file" class="file-input" id="octFile" name="oct_file" accept="image/*">
+                    <div class="preview-container" id="octPreview"></div>
+                </div>
+                
+                <div class="upload-card">
+                    <label class="upload-label" for="fundusFile">Fundus Image (Optional)</label>
+                    <input type="file" class="file-input" id="fundusFile" name="fundus_file" accept="image/*">
+                    <div class="preview-container" id="fundusPreview"></div>
+                </div>
+            </div>
+            
+            <button type="submit">Analyze Images</button>
+        </form>
+
+        <div id="resultContainer" class="result-card" style="display: none;">
+            <div id="predictionResult"><strong>Disease:</strong> <span id="disease"></span></div>
+            <div class="confidence-meter">
+                <div class="confidence-fill" id="confidenceBar"></div>
+                <p id="confidenceText"></p>
+            </div>
+            <div id="modelInfo" class="model-indicator"><strong>Used Models:</strong> <span id="usedModels"></span></div>
+            <div class="explanation-box" id="diseaseExplanation"></div>
+            <div class="uploaded-images">
+                <h3>Uploaded Images</h3>
+                <img id="octResult" class="result-preview" src="" alt="OCT Image" style="display:none;">
+                <img id="fundusResult" class="result-preview" src="" alt="Fundus Image" style="display:none;">
+            </div>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
